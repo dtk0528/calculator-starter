@@ -8,6 +8,7 @@ function showNotImplemented() {
 const CalcButton = (props) => {
   const { className, children, onClick } = props;
   const extraClass = className || '';
+
   return (
     <button
       className={`calc-btn ${extraClass}`}

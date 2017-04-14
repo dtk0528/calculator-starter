@@ -44,6 +44,11 @@
   background-color: #d2d3d5;
 }
 
+.calc-zero {
+  background-color: #d2d3d5;
+  width: 120px;
+}
+
 .calc-operator {
   color: white;
   background-color: #f58c00;
