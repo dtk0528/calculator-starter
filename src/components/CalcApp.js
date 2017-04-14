@@ -3,6 +3,26 @@ import React from 'react';
 import CalcButton from './CalcButton';
 // 計算機 App
 class CalcApp extends React.Component {
+  static showNotImplemented() {
+    console.warn('This function is not implemented yet.');
+  }
+
+  static calculateResult(pN, op, dN) {
+    let result;
+
+    if (op === '+') {
+      result = Number(pN) + Number(dN);
+    } else if (op === '-') {
+      result = Number(pN) - Number(dN);
+    } else if (op === 'x') {
+      result = Number(pN) * Number(dN);
+    } else if (op === '÷') {
+      result = Number(pN) / Number(dN);
+    }
+
+    return String(result);
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -22,10 +42,6 @@ class CalcApp extends React.Component {
       equalIsClick: false,
       updateNumber: true,
     });
-  }
-
-  showNotImplemented() {
-    console.warn('This function is not implemented yet.');
   }
 
   handleNumberClick(num) {
@@ -77,22 +93,6 @@ class CalcApp extends React.Component {
     });
   }
 
-  calculateResult(pN, op, dN) {
-    let result;
-
-    if (op === '+') {
-      result = Number(pN) + Number(dN);
-    } else if (op === '-') {
-      result = Number(pN) - Number(dN);
-    } else if (op === 'x') {
-      result = Number(pN) * Number(dN);
-    } else if (op === '÷') {
-      result = Number(pN) / Number(dN);
-    }
-
-    return String(result);
-  }
-
   render() {
     const display = (this.state.displayNumber !== '') ? this.state.displayNumber : this.state.pendingNumber;
     return (
@@ -107,60 +107,76 @@ class CalcApp extends React.Component {
             <CalcButton onClick={this.showNotImplemented.bind(this)}>%</CalcButton>
             <CalcButton
               className="calc-operator"
-              onClick={this.handleOperatorClick.bind(this, '÷')}>÷</CalcButton>
+              onClick={this.handleOperatorClick.bind(this, '÷')}
+            >÷</CalcButton>
           </div>
           <div className="calc-row">
             <CalcButton
               className="calc-number"
-              onClick={this.handleNumberClick.bind(this, '7')}>7</CalcButton>
+              onClick={this.handleNumberClick.bind(this, '7')}
+            >7</CalcButton>
             <CalcButton
               className="calc-number"
-              onClick={this.handleNumberClick.bind(this, '8')}>8</CalcButton>
+              onClick={this.handleNumberClick.bind(this, '8')}
+            >8</CalcButton>
             <CalcButton
               className="calc-number"
-              onClick={this.handleNumberClick.bind(this, '9')}>9</CalcButton>
+              onClick={this.handleNumberClick.bind(this, '9')}
+            >9</CalcButton>
             <CalcButton
               className="calc-operator"
-              onClick={this.handleOperatorClick.bind(this, 'x')}>x</CalcButton>
+              onClick={this.handleOperatorClick.bind(this, 'x')}
+            >x</CalcButton>
           </div>
           <div className="calc-row">
             <CalcButton
               className="calc-number"
-              onClick={this.handleNumberClick.bind(this, '4')}>4</CalcButton>
+              onClick={this.handleNumberClick.bind(this, '4')}
+            >4</CalcButton>
             <CalcButton
               className="calc-number"
-              onClick={this.handleNumberClick.bind(this, '5')}>5</CalcButton>
+              onClick={this.handleNumberClick.bind(this, '5')}
+            >5</CalcButton>
             <CalcButton
               className="calc-number"
-              onClick={this.handleNumberClick.bind(this, '6')}>6</CalcButton>
+              onClick={this.handleNumberClick.bind(this, '6')}
+            >6</CalcButton>
             <CalcButton
               className="calc-operator"
-              onClick={this.handleOperatorClick.bind(this, '-')}>-</CalcButton>
+              onClick={this.handleOperatorClick.bind(this, '-')}
+            >-</CalcButton>
           </div>
           <div className="calc-row">
             <CalcButton
               className="calc-number"
-              onClick={this.handleNumberClick.bind(this, '1')}>1</CalcButton>
+              onClick={this.handleNumberClick.bind(this, '1')}
+            >1</CalcButton>
             <CalcButton
               className="calc-number"
-              onClick={this.handleNumberClick.bind(this, '2')}>2</CalcButton>
+              onClick={this.handleNumberClick.bind(this, '2')}
+            >2</CalcButton>
             <CalcButton
               className="calc-number"
-              onClick={this.handleNumberClick.bind(this, '3')}>3</CalcButton>
+              onClick={this.handleNumberClick.bind(this, '3')}
+            >3</CalcButton>
             <CalcButton
               className="calc-operator"
-              onClick={this.handleOperatorClick.bind(this, '+')}>+</CalcButton>
+              onClick={this.handleOperatorClick.bind(this, '+')}
+            >+</CalcButton>
           </div>
           <div className="calc-row">
             <CalcButton
               className="calc-zero"
-              onClick={this.handleNumberClick.bind(this, '0')}>0</CalcButton>
+              onClick={this.handleNumberClick.bind(this, '0')}
+            >0</CalcButton>
             <CalcButton
               className="calc-number"
-              onClick={this.handleOperatorClick.bind(this, '.')}>.</CalcButton>
+              onClick={this.handleOperatorClick.bind(this, '.')}
+            >.</CalcButton>
             <CalcButton
               className="calc-operator"
-              onClick={this.handleOperatorClick.bind(this, '=')}>=</CalcButton>
+              onClick={this.handleOperatorClick.bind(this, '=')}
+            >=</CalcButton>
           </div>
         </div>
       </div>
