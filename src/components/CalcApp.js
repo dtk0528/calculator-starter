@@ -3,11 +3,22 @@ import React from 'react';
 import CalcButton from './CalcButton';
 // 計算機 App
 class CalcApp extends React.Component {
-  static showNotImplemented() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayNumber: '',
+      pendingNumber: '0',
+      pendingOperator: '+',
+      equalIsClick: false,
+      updateNumber: true,
+    };
+  }
+
+  showNotImplemented() {
     console.warn('This function is not implemented yet.');
   }
 
-  static calculateResult(pN, op, dN) {
+  calculateResult(pN, op, dN) {
     let result;
 
     if (op === '+') {
@@ -21,17 +32,6 @@ class CalcApp extends React.Component {
     }
 
     return String(result);
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayNumber: '',
-      pendingNumber: '0',
-      pendingOperator: '+',
-      equalIsClick: false,
-      updateNumber: true,
-    };
   }
 
   resetState() {
@@ -64,6 +64,7 @@ class CalcApp extends React.Component {
     let penNum = this.state.pendingNumber;
     let penOpe = this.state.pendingOperator;
     let eqCli = this.state.equalIsClick;
+    let upNum = true;
     let result = this.calculateResult(penNum, penOpe, disNum);
 
     if (op === '=') {
@@ -73,23 +74,28 @@ class CalcApp extends React.Component {
       eqCli = true;
     } else if (op === '.') {
       if (disNum === '') disNum = '0';
-      if (disNum.indexOf('.') === -1) disNum += '.';
+      if (disNum.indexOf('.') === -1) {
+        disNum += '.';
+        upNum = false;
+      }
     } else if (op === 'pNs') {
       if (disNum !== 0 && disNum !== '') {
         disNum = (Number(disNum) >= 0) ? (`-${disNum}`) : disNum.substr(1);
       }
     } else {
+      result = (disNum === '' && (penOpe === 'x' || penOpe === '÷')) ? this.calculateResult(penNum, penOpe, '1') : result;
       penNum = eqCli ? disNum : result;
       disNum = '';
       penOpe = op;
       eqCli = false;
     }
+
     this.setState({
       displayNumber: disNum,
       pendingNumber: penNum,
       pendingOperator: penOpe,
       equalIsClick: eqCli,
-      updateNumber: true,
+      updateNumber: upNum,
     });
   }
 
